@@ -226,6 +226,7 @@ table tbody tr td:last-child {
 }
 
 .modal-overlay.active {
+  z-index: 999;
   opacity: 1;
   visibility: visible;
 }
