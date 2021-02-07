@@ -8,8 +8,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
     rel="stylesheet">
-  <!-- <script src="https://kit.fontawesome.com/57145eb3eb.js" crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  
   <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="./assets/total.svg" type="image/x-icon">
 
   <title>dev.finance$</title>
 </head>
@@ -23,39 +25,47 @@
     <section id="balance">
       <h2 class="sr-only">Balanço</h2>
 
-      <div class="card">
+      <div class="card" onclick="App.reload('only-incomes')">
         <h3>
           <span>Entradas</span>
           <img src="./assets/income.svg" alt="Image de entradas">
-        </h3>
 
+        </h3>
+        
         <p id="incomeDisplay">R$ 0,00</p>
+
       </div>
 
-      <div class="card">
+      <div class="card" onclick="App.reload('only-expenses')">
         <h3>
           <span>Saídas</span>
           <img src="./assets/expense.svg" alt="Image de saidas">
         </h3>
 
         <p id="expenseDisplay">R$ 0,00</p>
+
       </div>
 
-      <div class="card total">
+      <div class="card total" onclick="App.reload()">
         <h3>
           <span>Total</span>
           <img src="./assets/total.svg" alt="Image de saidas">
         </h3>
 
         <p id="totalDisplay">R$ 0,00</p>
-      </div>
 
+      </div>
+      <div class="info card-filter">
+        <p class="smaller">Clique para aplicar o filtro!</p>
+      </div>
     </section>
 
     <section id="transaction">
       <h2 class="sr-only">Transações</h2>
-
-      <a href="#" onclick="Modal.toggle()" class="button new">+ Nova Transação</a>
+      <div class="transactionActions">
+        <a href="#" onclick="Modal.toggle()" class="button new"> + Nova Transação</a>
+        <a href="#" onclick="" class="button filter"> Opções</a>
+      </div>
 
       <table id="data-table">
         <thead>
@@ -69,6 +79,9 @@
         <tbody>
         </tbody>
       </table>
+      <div class="info edit">
+        <p class="smaller">Clique na transação para editar!</p>
+      </div>
     </section>
 
 
@@ -77,7 +90,7 @@
   <div class="modal-overlay">
     <div class="modal">
       <div id="form">
-        <h2>Nova Transação</h2>
+        <h2 id='formTitle'>Nova Transação</h2>
         <form action="" onsubmit="Form.submit(event)">
           <div class="input-group">
             <label 

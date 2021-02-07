@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 html {
@@ -18,7 +19,6 @@ html {
 
 body {
   background: #f0f2f5;
-  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -36,6 +36,34 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-radius: 0;
+}
+
+.info{
+  font-size: small;
+
+  color: var(--dark-blue);
+  background: white;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  box-sizing: border-box;
+
+  min-width: 200px;
+  min-height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding:1rem 2rem;
+  border-radius: 0.25rem;
+  margin:1rem;
+
+  transform: scale(0);
+  transition:all 0.2s 0.2s;
+
 }
 
 /* Titles ======================= */
@@ -101,7 +129,9 @@ button:hover{
 
 /* Header ======================= */
 header {
-  background: #2d4a22;
+  /* background: #2d4a22; */
+  /* background: linear-gradient(45deg, #196050,#2d4a22, #051803fc); */
+  background: linear-gradient(45deg, #160000,#2d4a22, #051803fc);
   padding: 2rem 0 10rem;
   text-align: center;
 }
@@ -115,8 +145,6 @@ header {
 
 #balance {
   margin-top: -6rem;
-  /* display: inline-flex;
-  justify-content: center; */
 }
 
 #balance h2 {
@@ -132,6 +160,16 @@ header {
 
   margin-bottom: 2rem;
   color: var(--dark-blue);
+  transition: all .2s ease-in-out;
+}
+
+.card:hover{
+  box-shadow: -1px 5px 20px 0px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+.card:hover ~ .info.card-filter{
+  transform: scale(0.9);
 }
 
 .card h3 {
@@ -141,6 +179,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#incomeDisplay {
+  color:  #12a454
+}
+#expenseDisplay {
+  color: var(--red)
 }
 
 .card p {
@@ -155,6 +200,15 @@ header {
 }
 
 /* Table ======================== */
+.transactionActions{
+  display: flex;
+}
+
+.transactionActions a.filter {
+  margin-left: auto;
+}
+
+/* Table ======================== */
 #transaction {
   display: block;
   width: 100%;
@@ -165,6 +219,8 @@ header {
   width: 100%;
   border-spacing: 0 0.5rem;
   color: #969cb3;
+
+  pointer-events: none;
 }
 
 table th {
@@ -192,10 +248,15 @@ td.expense {
 
 table tbody tr {
   opacity: 0.7;
+  pointer-events: auto;
 }
 
 table tbody tr:hover {
   opacity: 1;
+}
+
+table:hover ~ .info.edit{
+  transform: scale(0.9);
 }
 
 table thead tr th:first-child,
@@ -237,6 +298,20 @@ table tbody tr td:last-child {
   border-radius: 0.25rem;
 }
 
+
+/* Swal ======================= */
+.swal2-content {
+  font-size: small;
+}
+
+.swal2-actions{
+  flex-wrap: nowrap;
+}
+
+.swal2-title{
+  font-weight: 400;
+}
+
 /* Form ======================= */
 #form {
   max-width: 500px;
@@ -253,8 +328,6 @@ input {
   padding: 0.8rem;
 
   width: 100%;
-
-  font-family: 'Poppins', sans-serif;
 }
 
 .input-group {
@@ -284,7 +357,7 @@ footer {
   color: var(--dark-blue);
 
   opacity: 0.6;
-}
+  }
 
 /* Responsive ================== */
 @media (min-width: 800px) {
