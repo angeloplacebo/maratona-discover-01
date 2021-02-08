@@ -79,33 +79,6 @@ h2 {
   transform: scale(0.9);
 }
 
-.info1{
-  font-size: small;
-
-  color: var(--dark-blue);
-  background: white;
-
-  position: absolute;
-  right: 0;
-  top: 0;
-
-  box-sizing: border-box;
-
-  min-width: 200px;
-  min-height: 50px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding:1rem 2rem;
-  border-radius: 0.25rem;
-  margin:1rem;
-
-  /* transform: scale(0); */
-  transition:all 0.2s 0.2s;
-}
-
 .sort-options{
   font-size: small;
 
@@ -120,7 +93,6 @@ h2 {
 
   transform: scale(0);
   transition:all 0.2s 0.2s;
-  overflow:auto;
 }
 
 .sort-options.active{
