@@ -9,7 +9,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  
+
   <link rel="stylesheet" href="styles.css">
   <link rel="shortcut icon" href="./assets/total.svg" type="image/x-icon">
 
@@ -25,18 +25,18 @@
     <section id="balance">
       <h2 class="sr-only">Balanço</h2>
 
-      <div class="card" onclick="App.reload('only-incomes')">
+      <div class="card" onclick="App.setFilter('only-incomes')">
         <h3>
           <span>Entradas</span>
           <img src="./assets/income.svg" alt="Image de entradas">
 
         </h3>
-        
+
         <p id="incomeDisplay">R$ 0,00</p>
 
       </div>
 
-      <div class="card" onclick="App.reload('only-expenses')">
+      <div class="card" onclick="App.setFilter('only-expenses')">
         <h3>
           <span>Saídas</span>
           <img src="./assets/expense.svg" alt="Image de saidas">
@@ -46,7 +46,7 @@
 
       </div>
 
-      <div class="card total" onclick="App.reload()">
+      <div class="card total" onclick="App.setFilter('')">
         <h3>
           <span>Total</span>
           <img src="./assets/total.svg" alt="Image de saidas">
@@ -62,9 +62,43 @@
 
     <section id="transaction">
       <h2 class="sr-only">Transações</h2>
+
       <div class="transactionActions">
         <a href="#" onclick="Modal.toggle()" class="button new"> + Nova Transação</a>
-        <a href="#" onclick="" class="button filter"> Opções</a>
+        <a href="#" onclick="SortOptions.toggle()" class="button btn-sort"> Ordenar</a>
+      </div>
+
+      <div class="sort-options">
+        <table id="sort-table">
+          <tbody>
+            <tr>
+              <td>
+                <img onclick="Utils.sortByName()" onmouseover="SortOptions.onMouseOver('nome','crescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-alpha-down-solid.svg" alt="ordenar por nome em ordem crescente">
+              </td>
+              <td>
+                <img onclick="Utils.sortByName('desc')" onmouseover="SortOptions.onMouseOver('nome','decrescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-alpha-up-solid.svg" alt="ordenar por nome em ordem decrescente">
+              </td>
+              <td>
+                <img onclick="Utils.sortByAmount()" onmouseover="SortOptions.onMouseOver('valor','crescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-amount-down-solid.svg" alt="ordenar por valor em ordem crescente">
+              </td>
+              <td>
+                <img onclick="Utils.sortByAmount('desc')" onmouseover="SortOptions.onMouseOver('valor','decrescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-amount-up-solid.svg" alt="ordenar por valor em ordem decrescente">
+              </td>
+              <td>
+                <img onclick="Utils.sortByDate()" onmouseover="SortOptions.onMouseOver('data','crescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-numeric-down-solid.svg" alt="ordenar por data em ordem crescente">
+              </td>
+              <td>
+                <img onclick="Utils.sortByDate('desc')" onmouseover="SortOptions.onMouseOver('data','decrescente')" onMouseOut="SortOptions.infoToggle()" src="./assets/sort-numeric-up-solid.svg" alt="ordenar por data em ordem decrescente">
+              </td>
+              <td>
+                <img onclick="Utils.removeSort()" onmouseover="SortOptions.onMouseOver()" onMouseOut="SortOptions.infoToggle()" src="./assets/times-solid.svg" alt="ordenar por data em ordem decrescente">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info sort">
+        <p class="smaller"></p>
       </div>
 
       <table id="data-table">
@@ -93,40 +127,19 @@
         <h2 id='formTitle'>Nova Transação</h2>
         <form action="" onsubmit="Form.submit(event)">
           <div class="input-group">
-            <label 
-              class="sr-only" 
-              for="description">Descrição</label>
-            <input 
-              type="text" 
-              id="description" 
-              name="description" 
-              placeholder="Descrição"
-            />
+            <label class="sr-only" for="description">Descrição</label>
+            <input type="text" id="description" name="description" placeholder="Descrição" />
           </div>
 
           <div class="input-group">
-            <label 
-              class="sr-only" 
-              for="amount">Valor</label>
-            <input 
-              type="number"
-              step="0.01"
-              id="amount" 
-              name="amount"
-              placeholder="0,00"
-            />
+            <label class="sr-only" for="amount">Valor</label>
+            <input type="number" step="0.01" id="amount" name="amount" placeholder="0,00" />
             <small>Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais</small>
           </div>
 
           <div class="input-group">
-            <label 
-              class="sr-only" 
-              for="date">Data</label>
-            <input 
-              type="date" 
-              id="date" 
-              name="date" 
-            />
+            <label class="sr-only" for="date">Data</label>
+            <input type="date" id="date" name="date" />
           </div>
 
           <div class="input-group actions">
